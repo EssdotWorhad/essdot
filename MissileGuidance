@@ -1,0 +1,52 @@
+"color: #569cd6;">#include 
+"color: #569cd6;">#include 
+"color: #569cd6;">using "color: #569cd6;">namespace "color: #4ec9b0;">std;
+
+"color: #569cd6;">class MissileGuidance {
+"color: #569cd6;">private:
+    "color: #569cd6;">double currentPosition;
+    "color: #569cd6;">double previousPosition;
+    "color: #569cd6;">double targetPosition;
+
+"color: #569cd6;">public:
+    MissileGuidance("color: #569cd6;">double target) : 
+        currentPosition(0),
+        previousPosition(0),
+        targetPosition(target) {}
+
+    "color: #569cd6;">void determineWhereItIs() {
+        "color: #4ec9b0;">cout << "The missile knows where it is at all times.\n";
+        "color: #4ec9b0;">cout << "It knows this because it knows where it isn't.\n";
+        
+        "color: #569cd6;">double whereItIsnt = targetPosition - currentPosition;
+        "color: #4ec9b0;">cout << "By subtracting where it is from where it isn't,\n";
+        "color: #4ec9b0;">cout << "or where it isn't from where it is (whichever is greater),\n";
+        "color: #4ec9b0;">cout << "it obtains a d">ifference or deviation.\n";
+        
+        "color: #569cd6;">double deviation = "color: #4ec9b0;">abs(whereItIsnt);
+        "color: #4ec9b0;">cout << "Current deviation: " << deviation << " units\n";
+        
+        previousPosition = currentPosition;
+        currentPosition += (whereItIsnt / 2); // Move towards target
+        
+        "color: #4ec9b0;">cout << "The guidance subsystem uses deviations to generate corrective\n";
+        "color: #4ec9b0;">cout << "commands to drive the missile from a position where it is,\n";
+        "color: #4ec9b0;">cout << "to a position where it isn't.\n";
+    }
+
+    bool hasReachedTarget() {
+        "color: #569cd6;">return "color: #4ec9b0;">abs(currentPosition - targetPosition) < 0.1;
+    }
+};
+
+"color: #569cd6;">int "color: #569cd6;">main() {
+    MissileGuidance missile(100.0);
+    "color: #569cd6;">int iterations = 0;
+    
+    "color: #569cd6;">while (!missile.hasReachedTarget() && iterations < 10) {
+        "color: #4ec9b0;">cout << "\nIteration " << ++iterations << ":\n";
+        missile.determineWhereItIs();
+    }
+    
+    "color: #569cd6;">return 0;
+}
